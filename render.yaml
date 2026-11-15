@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: entrelinhas-biblioteca
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ANNAS_SECRET_KEY
+        sync: false
+

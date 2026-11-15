@@ -1,0 +1,31 @@
+[package]
+name = "library-app"
+version = "0.1.0"
+description = "App de biblioteca de leitura (desktop + mobile) com temas por livro"
+authors = ["you"]
+edition = "2021"
+
+# Ver https://v2.tauri.app/develop/, seção "mobile"
+[lib]
+name = "library_app_lib"
+# staticlib/cdylib são necessários para iOS/Android; rlib para os testes/desktop
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-sql = { version = "2", features = ["sqlite"] }
+tauri-plugin-opener = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[target.'cfg(any(target_os = "android", target_os = "ios"))'.dependencies]
+tauri-plugin-sql = { version = "2", features = ["sqlite"] }
+
+[profile.release]
+panic = "abort"
+codegen-units = 1
+lto = true
+opt-level = "s"

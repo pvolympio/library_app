@@ -1,0 +1,673 @@
+.book-detail-page {
+  min-height: 100dvh;
+  color: var(--theme-color-text);
+  background: var(--theme-color-background);
+}
+
+.book-detail-header {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  min-height: 76px;
+  padding: 12px max(20px, calc((100vw - 1120px) / 2));
+  background: color-mix(in srgb, var(--theme-color-surface) 82%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--theme-color-text) 14%, transparent);
+  backdrop-filter: blur(14px);
+}
+
+.book-detail-header button {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  color: var(--theme-color-text);
+  background: var(--theme-color-surface);
+  border: 1px solid color-mix(in srgb, var(--theme-color-text) 28%, transparent);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.book-detail-header svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.book-detail-header p,
+.book-detail-header h1 {
+  margin: 0;
+}
+
+.book-detail-header p {
+  color: var(--theme-color-text-secondary);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.book-detail-header h1 {
+  font-size: clamp(21px, 3vw, 29px);
+}
+
+.book-detail-content {
+  position: relative;
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: clamp(32px, 6vw, 76px);
+  width: min(1100px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 52px 0 64px;
+}
+
+.book-detail-cover-column {
+  position: sticky;
+  top: 100px;
+  align-self: start;
+  min-width: 0;
+}
+
+.book-detail-cover-frame {
+  position: relative;
+  width: 240px;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  background: var(--theme-color-surface);
+  border: 1px solid color-mix(in srgb, var(--theme-color-text) 18%, transparent);
+  border-radius: 7px 14px 12px 6px;
+  box-shadow: 0 26px 58px rgb(0 0 0 / 22%);
+}
+
+.book-detail-cover-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 5px;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgb(0 0 0 / 22%), transparent);
+}
+
+.book-detail-cover-frame img,
+.book-detail-cover-skeleton,
+.book-detail-cover-fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.book-detail-cover-frame img {
+  display: block;
+  object-fit: cover;
+}
+
+.book-detail-cover-pending {
+  opacity: 0;
+}
+
+.book-detail-cover-fallback {
+  display: grid;
+  place-items: center;
+  color: var(--theme-color-surface);
+  background: var(--theme-color-text);
+}
+
+.book-detail-cover-fallback span {
+  font-family: var(--theme-font-heading);
+  font-size: 72px;
+}
+
+.book-detail-incomplete-badge {
+  position: absolute;
+  z-index: 4;
+  top: 8px;
+  right: 8px;
+  padding: 4px 6px;
+  color: #302400;
+  font-family: Inter, sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.1;
+  background: #F0C419;
+  border: 1px solid #735B00;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 18%);
+}
+
+.book-detail-cover-frame > .book-detail-manual-mark {
+  position: absolute;
+  z-index: 4;
+  right: 8px;
+  bottom: 8px;
+  color: #FFF;
+  background: rgb(0 0 0 / 72%);
+}
+
+.book-detail-isbn {
+  margin: 12px 0 0;
+  color: var(--theme-color-text-secondary);
+  font-size: 11px;
+  letter-spacing: .04em;
+  text-align: center;
+}
+
+.book-detail-information {
+  min-width: 0;
+  padding-top: 8px;
+}
+
+.book-detail-title-line {
+  display: flex;
+  gap: 8px;
+  align-items: start;
+}
+
+.book-detail-title-line h2 {
+  margin: 0;
+  font-size: clamp(30px, 4vw, 48px);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+}
+
+.book-detail-author {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin: 8px 0 20px;
+  color: var(--theme-color-text-secondary);
+  font-size: 16px;
+}
+
+.book-detail-catalog-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: -10px 0 22px;
+}
+
+.book-detail-catalog-meta span {
+  padding: 4px 8px;
+  color: var(--theme-color-text-secondary);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  border: 1px solid color-mix(in srgb, var(--theme-color-text) 18%, transparent);
+  border-radius: 999px;
+}
+
+.book-detail-genre-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: -10px 0 20px;
+}
+
+.book-detail-genre-line span {
+  padding: 5px 10px;
+  color: var(--theme-color-primary);
+  font-size: 12px;
+  font-weight: 800;
+  background: color-mix(in srgb, var(--theme-color-primary) 8%, transparent);
+  border-radius: 999px;
+}
+
+.book-detail-genre-line span + span {
+  color: var(--theme-color-text-secondary);
+  background: transparent;
+}
+
+.book-detail-manual-mark {
+  display: inline-grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  color: var(--theme-color-text-secondary);
+  border-radius: 999px;
+}
+
+.book-detail-manual-mark svg {
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.book-detail-rating {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  min-height: 24px;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.book-detail-stars {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.book-detail-stars svg {
+  width: 16px;
+  height: 16px;
+  fill: transparent;
+  stroke: var(--theme-color-text-secondary);
+  stroke-width: 1.5;
+}
+
+.book-detail-stars svg.is-filled {
+  fill: var(--theme-color-accent);
+  stroke: var(--theme-color-text);
+  stroke-width: .7;
+}
+
+.book-detail-description-section {
+  margin-top: 30px;
+}
+
+.book-detail-section-heading {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.book-detail-section-heading h3 {
+  margin: 0;
+  font-size: 17px;
+}
+
+.book-detail-description {
+  position: relative;
+  max-width: 720px;
+  margin-top: 10px;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.book-detail-description p {
+  margin: 0 0 1em;
+}
+
+.book-detail-description[data-expanded="false"] {
+  max-height: 25.6em;
+  overflow: hidden;
+}
+
+.book-detail-description[data-expanded="false"] p:nth-child(n + 4) {
+  display: none;
+}
+
+.book-detail-description[data-expanded="false"]::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 2.5em;
+  pointer-events: none;
+  background: linear-gradient(transparent, var(--theme-color-background));
+}
+
+.book-detail-read-more {
+  min-height: 36px;
+  padding: 0;
+  color: var(--theme-color-text);
+  font-size: 13px;
+  font-weight: 800;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  cursor: pointer;
+}
+
+.book-detail-actions {
+  display: grid;
+  gap: 15px;
+  margin-top: 34px;
+  padding: 18px;
+  background: color-mix(in srgb, var(--theme-color-surface) 88%, transparent);
+  border: 1px solid color-mix(in srgb, var(--theme-color-text) 14%, transparent);
+  border-radius: 16px;
+  box-shadow: 0 16px 44px rgb(0 0 0 / 8%);
+}
+
+.book-detail-primary-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 48px;
+  gap: 9px;
+}
+
+.book-detail-read-action {
+  min-height: 48px;
+  padding: 0 22px;
+  color: var(--theme-color-surface);
+  font-size: 14px;
+  font-weight: 800;
+  background: var(--theme-color-text);
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 120ms ease, opacity 120ms ease;
+}
+
+.book-detail-read-action:active {
+  transform: scale(0.98);
+}
+
+.book-detail-link-btn {
+  background: color-mix(in srgb, var(--theme-color-primary) 90%, black);
+}
+
+.book-detail-favorite {
+  display: grid;
+  place-items: center;
+  min-height: 48px;
+  color: var(--theme-color-text);
+  font-size: 24px;
+  background: var(--theme-color-surface);
+  border: 1px solid color-mix(in srgb, var(--theme-color-text) 20%, transparent);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.book-detail-favorite.is-active {
+  color: #9f1747;
+  background: color-mix(in srgb, #f4a6c6 26%, var(--theme-color-surface));
+}
+
+.book-detail-epub-panel {
+  margin: 2px 0;
+}
+
+.book-detail-epub-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: color-mix(in srgb, var(--theme-color-surface) 95%, transparent);
+  border: 1px solid color-mix(in srgb, var(--theme-color-text) 14%, transparent);
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.book-detail-epub-card.is-active {
+  border-color: color-mix(in srgb, var(--theme-color-primary) 30%, transparent);
+  background: color-mix(in srgb, var(--theme-color-primary) 5%, var(--theme-color-surface));
+}
+
+.book-detail-epub-icon {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--theme-color-primary);
+  color: var(--theme-color-surface);
+  font-size: 11px;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+.book-detail-epub-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.book-detail-epub-text strong {
+  color: var(--theme-color-text);
+  font-size: 12px;
+}
+
+.book-detail-epub-text span {
+  color: var(--theme-color-text-secondary);
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.book-detail-epub-tools {
+  display: flex;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.book-detail-epub-tools button {
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--theme-color-text-secondary);
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--theme-color-text) 18%, transparent);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.book-detail-epub-tools button:hover {
+  color: var(--theme-color-text);
+  border-color: currentColor;
+}
+
+.book-detail-epub-tools button.is-danger:hover {
+  color: #dc2626;
+  border-color: #dc2626;
+}
+
+.book-detail-epub-dropzone {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 1.5px dashed color-mix(in srgb, var(--theme-color-text) 24%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--theme-color-surface) 60%, transparent);
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+
+.book-detail-epub-dropzone:hover,
+.book-detail-epub-dropzone.is-over {
+  border-color: var(--theme-color-primary);
+  background: color-mix(in srgb, var(--theme-color-primary) 8%, var(--theme-color-surface));
+}
+
+.book-detail-epub-dropzone svg {
+  width: 24px;
+  height: 24px;
+  color: var(--theme-color-primary);
+  flex-shrink: 0;
+}
+
+.book-detail-epub-dropzone p {
+  margin: 0;
+  color: var(--theme-color-text);
+  font-size: 12px;
+}
+
+.book-detail-epub-dropzone span {
+  color: var(--theme-color-text-secondary);
+  font-size: 11px;
+}
+
+.book-detail-status-control {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.book-detail-status-control button {
+  min-height: 34px;
+  padding: 0 10px;
+  color: var(--theme-color-text-secondary);
+  font-size: 12px;
+  font-weight: 750;
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--theme-color-text) 16%, transparent);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.book-detail-status-control button[aria-pressed="true"] {
+  color: var(--theme-color-surface);
+  background: var(--theme-color-primary);
+  border-color: var(--theme-color-primary);
+}
+
+.book-detail-status-control .book-detail-remove {
+  margin-left: auto;
+  color: var(--theme-color-text-secondary);
+  border-color: transparent;
+}
+
+.book-detail-personal-rating {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px solid color-mix(in srgb, var(--theme-color-text) 10%, transparent);
+}
+
+.book-detail-personal-rating > span {
+  color: var(--theme-color-text-secondary);
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.book-detail-personal-rating button {
+  padding: 2px;
+  color: color-mix(in srgb, var(--theme-color-text) 22%, transparent);
+  font-size: 20px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.book-detail-personal-rating button.is-filled {
+  color: var(--theme-color-accent);
+  text-shadow: 0 1px var(--theme-color-text);
+}
+
+.book-detail-related {
+  width: min(1100px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 10px 0 90px;
+  border-top: 1px solid color-mix(in srgb, var(--theme-color-text) 12%, transparent);
+}
+
+.book-detail-related > div:first-child {
+  margin: 35px 0 26px;
+}
+
+.book-detail-related p,
+.book-detail-related h2 {
+  margin: 0;
+}
+
+.book-detail-related p {
+  color: var(--theme-color-primary);
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.book-detail-related h2 {
+  margin-top: 4px;
+  font-size: clamp(24px, 3vw, 34px);
+}
+
+.book-detail-related .book-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.book-detail-description-skeleton {
+  display: grid;
+  gap: 11px;
+  margin-top: 48px;
+}
+
+.book-detail-description-skeleton span {
+  display: block;
+  width: 100%;
+  height: 16px;
+  border-radius: 4px;
+}
+
+.book-detail-description-skeleton span:nth-child(2) {
+  width: 90%;
+}
+
+.book-detail-description-skeleton span:nth-child(3) {
+  width: 60%;
+}
+
+.book-detail-page button:focus-visible {
+  outline: 2px solid var(--theme-color-text);
+  outline-offset: 3px;
+}
+
+[data-theme="harry-potter"] .book-detail-cover-frame,
+[data-theme="harry-potter"] .book-detail-header button {
+  border-color: #8F836B;
+}
+
+@media (max-width: 620px) {
+  .book-detail-header {
+    padding-inline: 12px;
+  }
+
+  .book-detail-content {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+    padding-top: 24px;
+  }
+
+  .book-detail-cover-column {
+    position: static;
+  }
+
+  .book-detail-cover-frame {
+    width: 100%;
+  }
+
+  .book-detail-information {
+    padding-top: 0;
+  }
+
+  .book-detail-read-action {
+    width: 100%;
+  }
+
+  .book-detail-title-line h2 {
+    font-size: 31px;
+  }
+
+  .book-detail-actions {
+    margin-inline: -4px;
+  }
+
+  .book-detail-related {
+    width: calc(100% - 32px);
+  }
+
+  .book-detail-related .book-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .book-detail-related .book-grid-card:nth-child(n+5) {
+    display: none;
+  }
+}

@@ -1,0 +1,436 @@
+.annotations-page {
+  min-height: 100dvh;
+  color: var(--theme-color-text);
+  background: var(--theme-color-background);
+}
+
+.annotations-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  min-height: 78px;
+  padding: 12px max(20px, calc((100vw - 900px) / 2));
+  background: var(--theme-color-surface);
+  border-bottom: 1px solid color-mix(in srgb, var(--theme-color-text) 18%, transparent);
+  backdrop-filter: blur(14px);
+}
+
+.annotations-header p,
+.annotations-header h1 {
+  margin: 0;
+}
+
+.annotations-header p {
+  color: var(--theme-color-text-secondary);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.annotations-header h1 {
+  font-size: clamp(20px, 3vw, 28px);
+  line-height: 1.15;
+}
+
+.annotations-back,
+.annotations-export {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--theme-color-text);
+  background: var(--theme-color-surface);
+  border: 1px solid color-mix(in srgb, var(--theme-color-text) 28%, transparent);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.annotations-back {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+}
+
+.annotations-export {
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.annotations-back svg,
+.annotations-export svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.annotations-export:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+.annotations-content {
+  width: min(820px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 28px 0 64px;
+}
+
+.annotations-summary {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.annotations-summary span {
+  padding: 5px 10px;
+  color: var(--theme-color-text-secondary);
+  font-size: 12px;
+  background: var(--theme-color-surface);
+  border: 1px solid color-mix(in srgb, var(--theme-color-text) 20%, transparent);
+  border-radius: 999px;
+}
+
+.annotations-tools {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) 220px auto;
+  gap: 9px;
+  align-items: center;
+  margin-bottom: 18px;
+  padding: 12px;
+  background: color-mix(in srgb, var(--theme-color-surface) 88%, transparent);
+  border: 1px solid color-mix(in srgb, var(--theme-color-text) 13%, transparent);
+  border-radius: 13px;
+}
+
+.annotations-tools input,
+.annotations-tools select {
+  width: 100%;
+  height: 40px;
+  padding: 0 11px;
+  color: var(--theme-color-text);
+  font-family: var(--theme-font-body);
+  font-size: 13px;
+  background: var(--theme-color-surface);
+  border: 1px solid color-mix(in srgb, var(--theme-color-text) 16%, transparent);
+  border-radius: 8px;
+}
+
+.annotations-tools > span {
+  color: var(--theme-color-text-secondary);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.annotations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.annotation-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px 18px;
+  width: 100%;
+  padding: 17px 18px 17px 22px;
+  color: var(--theme-color-text);
+  text-align: left;
+  background: var(--theme-color-surface);
+  border: 1px solid color-mix(in srgb, var(--theme-color-text) 17%, transparent);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 5%);
+  cursor: default;
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.annotation-item::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: var(--annotation-color);
+  border-radius: 12px 0 0 12px;
+}
+
+.annotation-item:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--theme-color-accent) 45%, transparent);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 8%);
+}
+
+.annotation-book {
+  overflow: hidden;
+  color: var(--theme-color-text-secondary);
+  font-size: 12px;
+  font-weight: 750;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.annotation-item time {
+  color: var(--theme-color-text-secondary);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.annotation-item blockquote {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-family: var(--theme-font-heading);
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.55;
+}
+
+.annotation-item p {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding-top: 9px;
+  font-size: 14px;
+  line-height: 1.5;
+  border-top: 1px solid color-mix(in srgb, var(--theme-color-primary) 10%, transparent);
+}
+
+.annotation-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 6px;
+  padding-top: 7px;
+}
+
+.annotation-actions button {
+  min-height: 32px;
+  padding: 0 10px;
+  color: var(--theme-color-text-secondary);
+  font-size: 12px;
+  font-weight: 750;
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--theme-color-text) 14%, transparent);
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.annotation-actions button:first-child {
+  color: var(--theme-color-surface);
+  background: var(--theme-color-text);
+}
+
+.annotation-actions button:last-child {
+  margin-left: auto;
+}
+
+.annotations-message {
+  padding: 48px 0;
+  color: var(--theme-color-text-secondary);
+  text-align: center;
+}
+
+.annotations-empty {
+  padding: 72px 20px;
+  text-align: center;
+}
+
+.annotations-empty > span {
+  display: block;
+  height: 54px;
+  color: var(--theme-color-accent);
+  font-family: Georgia, serif;
+  font-size: 74px;
+  line-height: 1;
+  opacity: .7;
+}
+
+.annotations-empty h2 {
+  margin: 8px 0 6px;
+  font-size: 22px;
+}
+
+.annotations-empty p {
+  max-width: 390px;
+  margin: 0 auto;
+  color: var(--theme-color-text-secondary);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.annotations-empty button {
+  min-height: 42px;
+  margin-top: 18px;
+  padding: 0 16px;
+  color: var(--theme-color-surface);
+  font-size: 13px;
+  font-weight: 800;
+  background: var(--theme-color-text);
+  border: 0;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+.annotation-dialog-layer {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.annotation-dialog-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 48%);
+  border: 0;
+  backdrop-filter: blur(4px);
+}
+
+.annotation-dialog {
+  position: relative;
+  width: min(520px, 100%);
+  padding: 24px;
+  background: var(--theme-color-surface);
+  border: 1px solid color-mix(in srgb, var(--theme-color-text) 18%, transparent);
+  border-radius: 16px;
+  box-shadow: 0 30px 80px rgb(0 0 0 / 30%);
+}
+
+.annotation-dialog > p,
+.annotation-dialog h2 {
+  margin: 0;
+}
+
+.annotation-dialog > p {
+  color: var(--theme-color-primary);
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.annotation-dialog h2 {
+  margin-top: 3px;
+  font-size: 25px;
+}
+
+.annotation-dialog blockquote {
+  margin: 18px 0;
+  padding: 12px 15px;
+  font-family: var(--theme-font-heading);
+  font-size: 14px;
+  font-style: italic;
+  line-height: 1.5;
+  background: color-mix(in srgb, var(--theme-color-background) 75%, transparent);
+  border-left: 4px solid var(--theme-color-accent);
+}
+
+.annotation-dialog label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.annotation-dialog textarea {
+  width: 100%;
+  resize: vertical;
+  padding: 12px;
+  color: var(--theme-color-text);
+  font-family: var(--theme-font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  background: var(--theme-color-background);
+  border: 1px solid color-mix(in srgb, var(--theme-color-text) 18%, transparent);
+  border-radius: 9px;
+}
+
+.annotation-dialog > div {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.annotation-dialog > div button {
+  min-height: 40px;
+  padding: 0 14px;
+  color: var(--theme-color-text);
+  font-size: 12px;
+  font-weight: 800;
+  background: var(--theme-color-surface);
+  border: 1px solid color-mix(in srgb, var(--theme-color-text) 18%, transparent);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.annotation-dialog > div button:last-child {
+  color: var(--theme-color-surface);
+  background: var(--theme-color-text);
+}
+
+.annotations-page button:focus-visible {
+  outline: 2px solid var(--theme-color-text);
+  outline-offset: 3px;
+}
+
+[data-theme="harry-potter"] .annotations-back,
+[data-theme="harry-potter"] .annotations-export,
+[data-theme="harry-potter"] .annotation-item {
+  border-color: #8F836B;
+}
+
+@media (max-width: 520px) {
+  .annotations-header {
+    grid-template-columns: 40px minmax(0, 1fr) 42px;
+    padding-inline: 12px;
+  }
+
+  .annotations-export {
+    width: 40px;
+    padding: 0;
+  }
+
+  .annotations-export span {
+    display: none;
+  }
+
+  .annotation-item {
+    gap: 6px 10px;
+    padding-right: 14px;
+  }
+
+  .annotation-item time {
+    font-size: 11px;
+  }
+
+  .annotations-tools {
+    grid-template-columns: 1fr;
+  }
+
+  .annotations-tools > span {
+    display: none;
+  }
+
+  .annotation-actions {
+    flex-wrap: wrap;
+  }
+
+  .annotation-actions button:last-child {
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .annotation-item {
+    transition: none;
+  }
+}

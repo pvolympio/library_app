@@ -1,0 +1,15 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Capacidades padrão da janela principal (desktop + mobile)",
+  "windows": ["main"],
+  "platforms": ["macOS", "windows", "linux", "android", "iOS"],
+  "permissions": [
+    "core:default",
+    "opener:default",
+    "sql:default",
+    "sql:allow-load",
+    "sql:allow-execute",
+    "sql:allow-select"
+  ]
+}
