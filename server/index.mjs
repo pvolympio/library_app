@@ -189,7 +189,7 @@ app.get("/api/books/download", async (req, res) => {
 // Em produção, serve o frontend compilado (dist/)
 if (fs.existsSync(DIST_DIR)) {
   app.use(express.static(DIST_DIR));
-  app.get("*", (_req, res) => {
+  app.get(/.*/, (_req, res) => {
     res.sendFile(path.join(DIST_DIR, "index.html"));
   });
 }
