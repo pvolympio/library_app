@@ -1,9 +1,9 @@
 import * as cheerio from "cheerio";
 
 const DEFAULT_MIRRORS = [
-  "https://annas-archive.se",
-  "https://annas-archive.org",
-  "https://annas-archive.li",
+  "https://annas-archive.gl",
+  "https://annas-archive.pk",
+  "https://annas-archive.gd",
 ];
 
 function getMirrors() {
@@ -12,6 +12,15 @@ function getMirrors() {
     return [envMirror.replace(/\/+$/, ""), ...DEFAULT_MIRRORS];
   }
   return DEFAULT_MIRRORS;
+}
+
+export function getAnnasSearchUrl(query, lang = "") {
+  const baseUrl = getMirrors()[0];
+  const url = new URL(`${baseUrl}/search`);
+  url.searchParams.set("q", query);
+  url.searchParams.set("ext", "epub");
+  if (lang) url.searchParams.set("lang", lang);
+  return url.toString();
 }
 
 const REQUEST_HEADERS = {
@@ -123,6 +132,11 @@ export async function searchAnnasArchive(query, options = {}) {
 
       if (!response.ok) {
         lastError = new Error(`HTTP ${response.status} em ${baseUrl}`);
+        continue;
+      }
+
+      if (html.includes("forsale.min.js") || !html.toLowerCase().includes("anna")) {
+        lastError = new Error(`Mirror ${baseUrl} indisponível`);
         continue;
       }
 

@@ -1,8 +1,14 @@
 /**
  * Fontes gratuitas e abertas de EPUB (sem Cloudflare e sem necessidade de chave):
  * - Gutendex (Project Gutenberg)
- * - Internet Archive
+ * - Internet Archive (apenas itens de acesso aberto, excluindo livros de empréstimo restrito 401)
  */
+
+const IA_LANG_MAP = {
+  pt: "por",
+  en: "eng",
+  es: "spa",
+};
 
 export async function searchGutendex(query, lang = "") {
   try {
@@ -51,10 +57,13 @@ export async function searchGutendex(query, lang = "") {
   }
 }
 
-export async function searchInternetArchive(query) {
+export async function searchInternetArchive(query, lang = "") {
   try {
     const url = new URL("https://archive.org/advancedsearch.php");
-    const q = `(${query}) AND mediatype:(texts) AND format:(EPUB)`;
+    const langClause =
+      lang && IA_LANG_MAP[lang] ? ` AND language:(${IA_LANG_MAP[lang]})` : "";
+    const q = `(${query}) AND mediatype:(texts) AND format:(EPUB) AND NOT access-restricted-item:(true) AND NOT collection:(inlibrary)${langClause}`;
+
     url.searchParams.set("q", q);
     url.searchParams.append("fl[]", "identifier");
     url.searchParams.append("fl[]", "title");
@@ -95,4 +104,3 @@ export async function searchInternetArchive(query) {
     return [];
   }
 }
-

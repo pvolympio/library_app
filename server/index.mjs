@@ -2,7 +2,7 @@ import express from "express";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { resolveAnnasDownload, searchAnnasArchive } from "./annas.mjs";
+import { getAnnasSearchUrl, resolveAnnasDownload, searchAnnasArchive } from "./annas.mjs";
 import { searchGutendex, searchInternetArchive } from "./open-sources.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -51,7 +51,7 @@ app.get("/api/books/search", async (req, res) => {
   const [annasOutcome, gutenbergResults, archiveResults] = await Promise.all([
     searchAnnasArchive(q, { lang, ext: "epub" }),
     searchGutendex(q, lang),
-    searchInternetArchive(q),
+    searchInternetArchive(q, lang),
   ]);
 
   // Prioriza fontes com download direto garantido primeiro, mesclando com Anna's Archive
@@ -68,6 +68,7 @@ app.get("/api/books/search", async (req, res) => {
     sourcesStatus: {
       annasArchive: annasOutcome.ok ? "ok" : "unavailable",
       annasError: annasOutcome.ok ? undefined : annasOutcome.error,
+      annasSearchUrl: getAnnasSearchUrl(q, lang),
       gutenbergCount: gutenbergResults.length,
       archiveCount: archiveResults.length,
     },
@@ -132,7 +133,7 @@ app.get("/api/books/download", async (req, res) => {
   }
 
   try {
-    const upstream = await fetch(targetUrl, {
+    let upstream = await fetch(targetUrl, {
       headers: {
         "User-Agent":
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/128.0.0.0 Safari/537.36",
@@ -140,6 +141,37 @@ app.get("/api/books/download", async (req, res) => {
       redirect: "follow",
       signal: AbortSignal.timeout(30000),
     });
+
+    // Se for Internet Archive e o nome padrão {id}.epub deu 404, busca o nome real do .epub nos metadados
+    if (upstream.status === 404 && targetUrl.startsWith("https://archive.org/download/")) {
+      const match = targetUrl.match(/^https:\/\/archive\.org\/download\/([^/]+)\//);
+      if (match) {
+        const identifier = match[1];
+        const metaRes = await fetch(
+          `https://archive.org/metadata/${identifier}/files`,
+          { signal: AbortSignal.timeout(8000) },
+        );
+        if (metaRes.ok) {
+          const metaJson = await metaRes.json();
+          const epubFile = Array.isArray(metaJson?.result)
+            ? metaJson.result.find(
+                (f) => typeof f?.name === "string" && f.name.toLowerCase().endsWith(".epub") && f.private !== "true",
+              )
+            : null;
+          if (epubFile) {
+            targetUrl = `https://archive.org/download/${identifier}/${encodeURIComponent(epubFile.name)}`;
+            upstream = await fetch(targetUrl, {
+              headers: {
+                "User-Agent":
+                  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/128.0.0.0 Safari/537.36",
+              },
+              redirect: "follow",
+              signal: AbortSignal.timeout(30000),
+            });
+          }
+        }
+      }
+    }
 
     if (!upstream.ok) {
       res.status(422).json({

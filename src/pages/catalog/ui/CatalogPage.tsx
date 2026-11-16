@@ -38,6 +38,7 @@ export function CatalogPage() {
   const [onlineResults, setOnlineResults] = useState<OnlineBookResult[]>([]);
   const [onlineLoading, setOnlineLoading] = useState(false);
   const [onlineError, setOnlineError] = useState<string | null>(null);
+  const [annasSearchUrl, setAnnasSearchUrl] = useState<string | null>(null);
   const [downloadingId, setDownloadingId] = useState<string | null>(null);
   const [manualFallback, setManualFallback] = useState<{
     title: string;
@@ -92,6 +93,11 @@ export function CatalogPage() {
       .then((data) => {
         if (!active) return;
         setOnlineResults(data.results);
+        setAnnasSearchUrl(
+          data.sourcesStatus?.annasArchive === "unavailable"
+            ? data.sourcesStatus.annasSearchUrl ?? null
+            : null,
+        );
       })
       .catch(() => {
         if (!active) return;
@@ -391,11 +397,27 @@ export function CatalogPage() {
             </section>
           ) : (
             <section className="product-empty">
-              <h2>Nenhum EPUB encontrado</h2>
+              <h2>Nenhum EPUB aberto encontrado</h2>
               <p>
-                Tente buscar usando apenas o título principal ou o sobrenome do autor, ou troque
-                o filtro de idioma para &ldquo;Todos os idiomas&rdquo;.
+                Livros recentes ou protegidos por direitos autorais não ficam disponíveis para
+                download direto automático no servidor. Você pode buscar o EPUB no navegador e
+                arrastar o arquivo para a sua estante!
               </p>
+              {annasSearchUrl ? (
+                <div className="product-empty-actions">
+                  <a
+                    href={annasSearchUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="online-fallback-link"
+                  >
+                    Buscar “{query.trim()}” no Anna&apos;s Archive
+                  </a>
+                  <button type="button" onClick={() => navigate("/biblioteca")}>
+                    Ir para Minha Estante
+                  </button>
+                </div>
+              ) : null}
             </section>
           )}
         </>

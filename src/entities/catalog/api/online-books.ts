@@ -20,6 +20,7 @@ export interface OnlineSearchResponse {
   sourcesStatus: {
     annasArchive: "ok" | "unavailable";
     annasError?: string;
+    annasSearchUrl?: string;
     gutenbergCount: number;
     archiveCount: number;
   };
