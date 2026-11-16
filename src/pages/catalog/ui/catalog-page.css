@@ -279,14 +279,21 @@
 }
 
 .online-fallback-link {
-  color: var(--theme-color-surface);
+  color: #ffffff;
   background: var(--theme-color-primary);
 }
 
+.product-empty-actions button,
 .online-fallback-library {
+  min-height: 40px;
+  padding: 0 16px;
   color: var(--theme-color-text);
+  font-size: 13px;
+  font-weight: 750;
   background: var(--theme-color-surface);
-  border: 1px solid color-mix(in srgb, var(--theme-color-text) 20%, transparent);
+  border: 1px solid color-mix(in srgb, var(--theme-color-text) 22%, transparent);
+  border-radius: 9px;
+  cursor: pointer;
 }
 
 .online-books-grid {

@@ -5,7 +5,7 @@ export interface OnlineBookResult {
   coverUrl: string | null;
   extension: string;
   fileSize?: string;
-  source: "annas-archive" | "gutenberg" | "internet-archive";
+  source: "libgen" | "annas-archive" | "gutenberg" | "internet-archive";
   sourceLabel: string;
   md5?: string;
   downloadUrl?: string;

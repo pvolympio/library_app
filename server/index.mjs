@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { getAnnasSearchUrl, resolveAnnasDownload, searchAnnasArchive } from "./annas.mjs";
+import { downloadLibgenEpub, searchLibgen } from "./libgen.mjs";
 import { searchGutendex, searchInternetArchive } from "./open-sources.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -48,16 +49,24 @@ app.get("/api/books/search", async (req, res) => {
     return;
   }
 
-  const [annasOutcome, gutenbergResults, archiveResults] = await Promise.all([
-    searchAnnasArchive(q, { lang, ext: "epub" }),
-    searchGutendex(q, lang),
-    searchInternetArchive(q, lang),
-  ]);
+  const [libgenResults, annasOutcome, gutenbergResults, archiveResults] =
+    await Promise.all([
+      searchLibgen(q, lang),
+      searchAnnasArchive(q, { lang, ext: "epub" }),
+      searchGutendex(q, lang),
+      searchInternetArchive(q, lang),
+    ]);
 
-  // Prioriza fontes com download direto garantido primeiro, mesclando com Anna's Archive
+  const seenMd5 = new Set(libgenResults.map((b) => b.md5).filter(Boolean));
+  const uniqueAnnasResults = annasOutcome.results.filter(
+    (b) => !b.md5 || !seenMd5.has(b.md5),
+  );
+
+  // Prioriza Acervo Global (LibGen) e Domínio Público (Gutendex), pois têm download direto garantido
   const combinedResults = [
+    ...libgenResults,
     ...gutenbergResults,
-    ...annasOutcome.results,
+    ...uniqueAnnasResults,
     ...archiveResults,
   ];
 
@@ -69,6 +78,7 @@ app.get("/api/books/search", async (req, res) => {
       annasArchive: annasOutcome.ok ? "ok" : "unavailable",
       annasError: annasOutcome.ok ? undefined : annasOutcome.error,
       annasSearchUrl: getAnnasSearchUrl(q, lang),
+      libgenCount: libgenResults.length,
       gutenbergCount: gutenbergResults.length,
       archiveCount: archiveResults.length,
     },
@@ -113,6 +123,23 @@ app.get("/api/books/download", async (req, res) => {
   let fallbackPageUrl = null;
 
   if (!targetUrl && md5) {
+    // Tenta download direto via LibGen primeiro (funciona sem chave nem Cloudflare)
+    const libgenDownload = await downloadLibgenEpub(md5);
+    if (libgenDownload.ok && libgenDownload.buffer) {
+      const safeFileName =
+        rawTitle
+          .replace(/[^\p{L}\p{N}\s_-]/gu, "")
+          .trim()
+          .slice(0, 60) || "livro";
+      res.setHeader("Content-Type", "application/epub+zip");
+      res.setHeader(
+        "Content-Disposition",
+        `attachment; filename="${encodeURIComponent(safeFileName)}.epub"`,
+      );
+      res.send(libgenDownload.buffer);
+      return;
+    }
+
     const resolution = await resolveAnnasDownload(md5, userKey);
     if (!resolution.ok) {
       res.status(422).json({
