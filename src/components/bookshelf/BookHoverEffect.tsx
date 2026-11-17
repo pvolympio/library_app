@@ -15,10 +15,12 @@ const aliceParticles = [
 ] as const;
 
 const maryCatParticles = [
-  { x: -18, drift: -24, delay: 0, rotate: -18, kind: "paw" },
-  { x: -4, drift: 12, delay: 0.08, rotate: 12, kind: "cat" },
-  { x: 10, drift: -10, delay: 0.14, rotate: 22, kind: "paw" },
-  { x: 20, drift: 24, delay: 0.2, rotate: -14, kind: "cat" },
+  { x: -22, drift: -28, delay: 0, rotate: -20, kind: "paw" },
+  { x: -10, drift: 14, delay: 0.06, rotate: 14, kind: "cat" },
+  { x: 2, drift: -16, delay: 0.11, rotate: -10, kind: "heart" },
+  { x: 14, drift: 22, delay: 0.16, rotate: 24, kind: "paw" },
+  { x: 22, drift: -12, delay: 0.21, rotate: -16, kind: "cat" },
+  { x: -4, drift: 28, delay: 0.26, rotate: 18, kind: "heart" },
 ] as const;
 
 export function BookHoverEffect({ themeId, active, burst, reducedMotion }: BookHoverEffectProps) {
@@ -87,6 +89,10 @@ export function BookHoverEffect({ themeId, active, burst, reducedMotion }: BookH
               <circle cx="10" cy="5.5" r="1.9" />
               <circle cx="14.5" cy="7.5" r="1.8" />
               <path d="M10 10.2c-2.5 0-4.2 1.8-4.2 3.7 0 1.4 1.1 2.4 2.4 2.4.7 0 1.3-.3 1.8-.3s1.1.3 1.8.3c1.3 0 2.4-1 2.4-2.4 0-1.9-1.7-3.7-4.2-3.7Z" />
+            </svg>
+          ) : particle.kind === "heart" ? (
+            <svg viewBox="0 0 20 20">
+              <path d="M10 16.5s-6-3.8-6-8.2A3.6 3.6 0 0 1 10 5.6a3.6 3.6 0 0 1 6 2.7c0 4.4-6 8.2-6 8.2Z" />
             </svg>
           ) : (
             <svg viewBox="0 0 20 20">

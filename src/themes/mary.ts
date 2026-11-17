@@ -2,19 +2,20 @@ import type { LibraryTheme } from "./tokens";
 
 /**
  * Tema "Mary".
- * Paleta acolhedora inspirada em gatos, menta suave (#9FD9B3), creme (#F0F6B9),
- * turquesa (#3EA3AF), ameixa (#81657E) e cereja vibrante (#FF1D44).
+ * Paleta vibrante inspirada em gatos:
+ * #5CACC4 (azul turquesa), #8CD19D (menta), #CEE879 (lima),
+ * #FCB653 (laranja dourado) e #FF5254 (coral vibrante).
  */
 export const maryTheme: LibraryTheme = {
   id: "mary",
   name: "Mary",
   colors: {
-    background: "#F5FBF7",
+    background: "#F2FAF8",
     surface: "#FFFFFF",
-    primary: "#81657E",
-    accent: "#FF1D44",
-    text: "#2D212C",
-    textSecondary: "#5E4A5C",
+    primary: "#2B8CA8",
+    accent: "#FF5254",
+    text: "#1A2B32",
+    textSecondary: "#3E5660",
   },
   fonts: {
     heading: "'Cormorant Garamond', Georgia, serif",
@@ -22,4 +23,3 @@ export const maryTheme: LibraryTheme = {
   },
   textures: {},
 };
-

@@ -241,19 +241,31 @@
 [data-theme="harry-potter"] .catalog-brand-mark i:nth-child(3) { background: #2b2118; }
 [data-theme="harry-potter"] .catalog-genre-rail button:hover { background: rgb(238 227 200 / 8%); }
 [data-theme="harry-potter"] .catalog-hero-books { filter: sepia(.24); }
+[data-theme="mary"] .catalog-page {
+  background-image:
+    radial-gradient(circle at 12% 18%, rgb(206 232 121 / 24%), transparent 32%),
+    radial-gradient(circle at 88% 10%, rgb(92 172 196 / 22%), transparent 34%),
+    radial-gradient(circle at 80% 72%, rgb(252 182 83 / 16%), transparent 36%);
+}
+[data-theme="mary"] .catalog-header {
+  border-bottom: 2px solid rgb(92 172 196 / 35%);
+  background: linear-gradient(90deg, rgb(255 255 255 / 92%), rgb(206 232 121 / 22%), rgb(140 209 157 / 18%));
+}
 [data-theme="mary"] .catalog-brand-mark {
-  background: #81657e;
+  background: #5cacc4;
   border-radius: 11px;
+  box-shadow: 0 7px 17px rgb(92 172 196 / 35%), inset 0 1px rgb(255 255 255 / 40%);
 }
 [data-theme="mary"] .catalog-brand-mark::before,
 [data-theme="mary"] .catalog-brand-mark::after {
   content: "";
   position: absolute;
-  top: -5px;
-  width: 11px;
-  height: 11px;
-  background: #81657e;
-  border-radius: 2px 6px 0 0;
+  top: -6px;
+  width: 12px;
+  height: 12px;
+  background: #5cacc4;
+  border-radius: 2px 7px 0 0;
+  box-shadow: inset 0 -2px 0 2px #ff5254;
 }
 [data-theme="mary"] .catalog-brand-mark::before {
   left: 3px;
@@ -263,37 +275,80 @@
   right: 3px;
   transform: scaleX(-1) rotate(-12deg);
 }
-[data-theme="mary"] .catalog-brand-mark i:nth-child(1) { background: #9fd9b3; }
-[data-theme="mary"] .catalog-brand-mark i:nth-child(2) { background: #f0f6b9; }
-[data-theme="mary"] .catalog-brand-mark i:nth-child(3) { background: #3ea3af; }
+[data-theme="mary"] .catalog-brand-mark i:nth-child(1) { background: #cee879; }
+[data-theme="mary"] .catalog-brand-mark i:nth-child(2) { background: #fcb653; }
+[data-theme="mary"] .catalog-brand-mark i:nth-child(3) { background: #ff5254; }
 [data-theme="mary"] .catalog-hero::before {
-  opacity: .38;
-  background: radial-gradient(circle, #9fd9b3, transparent 68%);
+  opacity: .52;
+  background: radial-gradient(circle, #8cd19d, transparent 68%);
 }
 [data-theme="mary"] .catalog-hero::after {
-  opacity: .42;
-  background: radial-gradient(ellipse, #f0f6b9, transparent 70%);
+  opacity: .48;
+  background: radial-gradient(ellipse, #fcb653, transparent 70%);
 }
-[data-theme="mary"] .hero-book-one { background: #81657e; }
-[data-theme="mary"] .hero-book-two { background: #3ea3af; }
-[data-theme="mary"] .hero-book-three { background: #ff1d44; }
+[data-theme="mary"] .catalog-search {
+  border: 2px solid rgb(92 172 196 / 42%);
+  box-shadow: 0 20px 50px rgb(92 172 196 / 18%);
+}
+[data-theme="mary"] .catalog-search-submit {
+  color: #ffffff;
+  background: #ff5254;
+  border-color: #ff5254;
+}
+[data-theme="mary"] .catalog-genres {
+  border: 2px solid rgb(140 209 157 / 55%);
+  background: linear-gradient(120deg, rgb(255 255 255 / 95%), rgb(206 232 121 / 18%));
+}
+[data-theme="mary"] .hero-book-one { background: #5cacc4; }
+[data-theme="mary"] .hero-book-two { background: #fcb653; }
+[data-theme="mary"] .hero-book-three { background: #ff5254; }
 [data-theme="mary"] .hero-orbit {
-  color: #81657e;
-  background: color-mix(in srgb, #f0f6b9 68%, #ffffff);
-  border-color: color-mix(in srgb, #3ea3af 55%, transparent);
+  top: 12px;
+  right: 8px;
+  color: #ff5254;
+  background: linear-gradient(135deg, #cee879, #8cd19d);
+  border: 2px solid #5cacc4;
+  box-shadow: 0 10px 24px rgb(92 172 196 / 28%);
 }
 .mary-hero-cat {
-  width: 30px;
-  height: 30px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.7;
-  stroke-linecap: round;
+  width: 28px;
+  height: 28px;
+  fill: #ff5254;
+}
+.mary-hero-sitting-cat {
+  position: absolute;
+  top: -12px;
+  left: 36px;
+  z-index: 4;
+  width: 112px;
+  height: 102px;
+  filter: drop-shadow(0 8px 14px rgb(26 43 50 / 16%));
+}
+.mary-hero-sitting-cat .cat-body {
+  fill: #fcb653;
+  stroke: #1a2b32;
+  stroke-width: 2.2;
   stroke-linejoin: round;
 }
-.mary-hero-cat circle {
-  fill: #ff1d44;
-  stroke: none;
+.mary-hero-sitting-cat .cat-tail {
+  fill: none;
+  stroke: #fcb653;
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+.mary-hero-sitting-cat .cat-ear-inner {
+  fill: #ff5254;
+}
+.mary-hero-sitting-cat .cat-eye {
+  fill: #1a2b32;
+}
+.mary-hero-sitting-cat .cat-nose {
+  fill: #ff5254;
+}
+.mary-hero-sitting-cat .cat-whisker {
+  stroke: #1a2b32;
+  stroke-width: 1.6;
+  stroke-linecap: round;
 }
 
 @media (max-width: 1150px) {

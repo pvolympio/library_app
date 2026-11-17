@@ -164,16 +164,33 @@ export function Home({ onOpenBook }: HomeProps) {
         </div>
 
         <div className="catalog-hero-books" aria-hidden="true">
+          {theme.id === "mary" ? (
+            <svg viewBox="0 0 120 110" className="mary-hero-sitting-cat">
+              <path
+                className="cat-tail"
+                d="M94 94c16-4 20-20 12-30-4-5-10-4-8 2"
+              />
+              <path
+                className="cat-body"
+                d="M36 98V56l-5-20 18 11a26 26 0 0 1 22 0l18-11-5 20v42Z"
+              />
+              <path className="cat-ear-inner" d="m36 53-2-11 10 6Zm48 0 2-11-10 6Z" />
+              <circle cx="51" cy="64" r="3.2" className="cat-eye" />
+              <circle cx="69" cy="64" r="3.2" className="cat-eye" />
+              <path className="cat-nose" d="m57 70 3 2.5L63 70Z" />
+              <path className="cat-whisker" d="M26 68h14m-14 5h14m40-5h14m-14 5h14" />
+            </svg>
+          ) : null}
           <span className="hero-book hero-book-one"><i /></span>
           <span className="hero-book hero-book-two"><i /></span>
           <span className="hero-book hero-book-three"><i /></span>
           <span className="hero-orbit">
             {theme.id === "mary" ? (
               <svg viewBox="0 0 24 24" className="mary-hero-cat" aria-hidden="true">
-                <path d="M5 14V6.5l3.8 2.8a7.4 7.4 0 0 1 6.4 0L19 6.5V14c0 3.6-3.1 6-7 6s-7-2.4-7-6Z" />
-                <circle cx="9.5" cy="13" r="1" />
-                <circle cx="14.5" cy="13" r="1" />
-                <path d="M11 15.2 12 16l1-.8" />
+                <circle cx="7" cy="9" r="1.9" />
+                <circle cx="12" cy="6.8" r="2" />
+                <circle cx="17" cy="9" r="1.9" />
+                <path d="M12 11.4c-2.8 0-4.6 2-4.6 4.1 0 1.5 1.2 2.6 2.6 2.6.8 0 1.4-.3 2-.3s1.2.3 2 .3c1.4 0 2.6-1.1 2.6-2.6 0-2.1-1.8-4.1-4.6-4.1Z" />
               </svg>
             ) : (
               "∞"

@@ -145,10 +145,10 @@
 .theme-preview-harry-potter i:nth-child(2) { background: #f5ecd8; }
 .theme-preview-harry-potter i:nth-child(3) { background: #e2b646; }
 
-.theme-preview-mary { background: linear-gradient(135deg, #f0f6b9, #9fd9b3); }
-.theme-preview-mary i:nth-child(1) { background: #81657e; }
-.theme-preview-mary i:nth-child(2) { background: #3ea3af; }
-.theme-preview-mary i:nth-child(3) { background: #ff1d44; }
+.theme-preview-mary { background: linear-gradient(135deg, #cee879, #8cd19d); }
+.theme-preview-mary i:nth-child(1) { background: #5cacc4; }
+.theme-preview-mary i:nth-child(2) { background: #fcb653; }
+.theme-preview-mary i:nth-child(3) { background: #ff5254; }
 
 .settings-theme-grid strong {
   align-self: end;

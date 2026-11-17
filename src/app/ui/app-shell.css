@@ -79,20 +79,27 @@
   box-shadow: 0 7px 18px rgb(0 0 0 / 16%), inset 0 1px rgb(255 255 255 / 25%);
 }
 
+[data-theme="mary"] .app-header {
+  border-bottom: 2px solid rgb(92 172 196 / 36%);
+  background: linear-gradient(90deg, rgb(255 255 255 / 92%), rgb(206 232 121 / 20%), rgb(140 209 157 / 18%));
+}
+
 [data-theme="mary"] .app-brand-mark {
-  background: #81657e;
+  background: #5cacc4;
   border-radius: 11px;
+  box-shadow: 0 7px 18px rgb(92 172 196 / 34%), inset 0 1px rgb(255 255 255 / 35%);
 }
 
 [data-theme="mary"] .app-brand-mark::before,
 [data-theme="mary"] .app-brand-mark::after {
   content: "";
   position: absolute;
-  top: -5px;
-  width: 11px;
-  height: 11px;
-  background: #81657e;
-  border-radius: 2px 6px 0 0;
+  top: -6px;
+  width: 12px;
+  height: 12px;
+  background: #5cacc4;
+  border-radius: 2px 7px 0 0;
+  box-shadow: inset 0 -2px 0 2px #ff5254;
 }
 
 [data-theme="mary"] .app-brand-mark::before {
@@ -106,15 +113,15 @@
 }
 
 [data-theme="mary"] .app-brand-mark i:nth-child(1) {
-  background: #9fd9b3;
+  background: #cee879;
 }
 
 [data-theme="mary"] .app-brand-mark i:nth-child(2) {
-  background: #f0f6b9;
+  background: #fcb653;
 }
 
 [data-theme="mary"] .app-brand-mark i:nth-child(3) {
-  background: #3ea3af;
+  background: #ff5254;
 }
 
 .app-brand-mark i {
