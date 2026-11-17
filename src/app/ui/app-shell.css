@@ -66,6 +66,7 @@
 }
 
 .app-brand-mark {
+  position: relative;
   display: flex;
   gap: 3px;
   align-items: end;
@@ -76,6 +77,44 @@
   background: var(--theme-color-text);
   border-radius: 12px;
   box-shadow: 0 7px 18px rgb(0 0 0 / 16%), inset 0 1px rgb(255 255 255 / 25%);
+}
+
+[data-theme="mary"] .app-brand-mark {
+  background: #81657e;
+  border-radius: 11px;
+}
+
+[data-theme="mary"] .app-brand-mark::before,
+[data-theme="mary"] .app-brand-mark::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  width: 11px;
+  height: 11px;
+  background: #81657e;
+  border-radius: 2px 6px 0 0;
+}
+
+[data-theme="mary"] .app-brand-mark::before {
+  left: 3px;
+  transform: rotate(-12deg);
+}
+
+[data-theme="mary"] .app-brand-mark::after {
+  right: 3px;
+  transform: scaleX(-1) rotate(-12deg);
+}
+
+[data-theme="mary"] .app-brand-mark i:nth-child(1) {
+  background: #9fd9b3;
+}
+
+[data-theme="mary"] .app-brand-mark i:nth-child(2) {
+  background: #f0f6b9;
+}
+
+[data-theme="mary"] .app-brand-mark i:nth-child(3) {
+  background: #3ea3af;
 }
 
 .app-brand-mark i {

@@ -32,12 +32,13 @@
 [data-theme="harry-potter"] .faceout-rating,
 [data-theme="harry-potter"] .faceout-discover { color: #d5c9ad; }
 
-[data-theme="percy-jackson"] .bookshelf-backdrop {
+[data-theme="mary"] .bookshelf-backdrop {
   background:
-    linear-gradient(115deg, transparent 0 19%, rgb(90 114 126 / 5%) 19.2%, transparent 19.8% 67%, rgb(90 114 126 / 5%) 67.2%, transparent 67.8%),
-    linear-gradient(180deg, rgb(255 255 255 / 96%), rgb(246 249 248 / 94%)),
-    #f0ede5;
-  border-color: rgb(27 75 102 / 15%);
+    radial-gradient(circle at 8% 14%, rgb(62 163 175 / 12%), transparent 28%),
+    radial-gradient(circle at 92% 84%, rgb(255 29 68 / 8%), transparent 32%),
+    linear-gradient(135deg, rgb(240 246 185 / 38%), rgb(159 217 179 / 28%) 52%, rgb(255 255 255 / 92%));
+  border-color: rgb(129 101 126 / 22%);
+  box-shadow: 0 24px 60px rgb(129 101 126 / 10%), inset 0 1px rgb(255 255 255 / 80%);
 }
 
 .display-shelf {
@@ -186,12 +187,12 @@
   border-top-color: #a58535;
   box-shadow: 0 17px 20px -8px rgb(0 0 0 / 82%), inset 0 -5px 8px rgb(0 0 0 / 30%);
 }
-[data-theme="percy-jackson"] .shelf-plank {
+[data-theme="mary"] .shelf-plank {
   background:
-    linear-gradient(110deg, transparent 0 23%, rgb(91 111 120 / 11%) 23.3%, transparent 23.9% 74%, rgb(91 111 120 / 9%) 74.3%, transparent 75%),
-    linear-gradient(180deg, #fff 0 20%, #efede8 21% 52%, #d6d3cc 53% 100%);
-  border-top-color: #d4af37;
-  box-shadow: 0 16px 20px -11px rgb(26 43 51 / 48%), inset 0 -4px 8px rgb(60 72 77 / 12%);
+    repeating-linear-gradient(90deg, transparent 0 42px, rgb(129 101 126 / 8%) 42px 44px, transparent 44px 86px),
+    linear-gradient(180deg, #f0f6b9 0 22%, #d8eedf 23% 54%, #9fd9b3 55% 100%);
+  border-top-color: #3ea3af;
+  box-shadow: 0 16px 22px -10px rgb(129 101 126 / 38%), inset 0 -4px 8px rgb(62 163 175 / 16%);
 }
 
 .faceout-book {
@@ -426,7 +427,19 @@
 .alice-falling-particle rect { fill: #fff; stroke: #d46a9f; stroke-width: 1.4; }
 .alice-falling-particle path { fill: #d46a9f; stroke: #d46a9f; stroke-width: 1; stroke-linecap: round; }
 .harry-spark { position: absolute; width: 3px; height: 3px; background: #d3a625; border-radius: 999px; box-shadow: 0 0 5px 2px rgb(211 166 37 / 62%); }
-.percy-book-glow { position: absolute; inset: -10px -12px; background: radial-gradient(circle, rgb(212 175 55 / 36%), rgb(212 175 55 / 8%) 40%, transparent 70%); border-radius: 50%; filter: blur(2px); }
+.mary-cat-particle {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  display: block;
+  width: 16px;
+  height: 16px;
+  filter: drop-shadow(0 2px 3px rgb(129 101 126 / 24%));
+}
+.mary-cat-particle svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.mary-cat-particle.is-paw svg { fill: #ff1d44; }
+.mary-cat-particle.is-cat svg { fill: #3ea3af; stroke: #81657e; stroke-width: 1.1; stroke-linejoin: round; }
+.mary-cat-particle.is-cat .cat-eye { fill: #f0f6b9; stroke: none; }
 
 @media (max-width: 700px) {
   .bookshelf-backdrop { border-radius: 18px; }

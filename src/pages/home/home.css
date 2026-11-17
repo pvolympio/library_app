@@ -241,7 +241,60 @@
 [data-theme="harry-potter"] .catalog-brand-mark i:nth-child(3) { background: #2b2118; }
 [data-theme="harry-potter"] .catalog-genre-rail button:hover { background: rgb(238 227 200 / 8%); }
 [data-theme="harry-potter"] .catalog-hero-books { filter: sepia(.24); }
-[data-theme="percy-jackson"] .catalog-brand-mark { border-radius: 8px; }
+[data-theme="mary"] .catalog-brand-mark {
+  background: #81657e;
+  border-radius: 11px;
+}
+[data-theme="mary"] .catalog-brand-mark::before,
+[data-theme="mary"] .catalog-brand-mark::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  width: 11px;
+  height: 11px;
+  background: #81657e;
+  border-radius: 2px 6px 0 0;
+}
+[data-theme="mary"] .catalog-brand-mark::before {
+  left: 3px;
+  transform: rotate(-12deg);
+}
+[data-theme="mary"] .catalog-brand-mark::after {
+  right: 3px;
+  transform: scaleX(-1) rotate(-12deg);
+}
+[data-theme="mary"] .catalog-brand-mark i:nth-child(1) { background: #9fd9b3; }
+[data-theme="mary"] .catalog-brand-mark i:nth-child(2) { background: #f0f6b9; }
+[data-theme="mary"] .catalog-brand-mark i:nth-child(3) { background: #3ea3af; }
+[data-theme="mary"] .catalog-hero::before {
+  opacity: .38;
+  background: radial-gradient(circle, #9fd9b3, transparent 68%);
+}
+[data-theme="mary"] .catalog-hero::after {
+  opacity: .42;
+  background: radial-gradient(ellipse, #f0f6b9, transparent 70%);
+}
+[data-theme="mary"] .hero-book-one { background: #81657e; }
+[data-theme="mary"] .hero-book-two { background: #3ea3af; }
+[data-theme="mary"] .hero-book-three { background: #ff1d44; }
+[data-theme="mary"] .hero-orbit {
+  color: #81657e;
+  background: color-mix(in srgb, #f0f6b9 68%, #ffffff);
+  border-color: color-mix(in srgb, #3ea3af 55%, transparent);
+}
+.mary-hero-cat {
+  width: 30px;
+  height: 30px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.mary-hero-cat circle {
+  fill: #ff1d44;
+  stroke: none;
+}
 
 @media (max-width: 1150px) {
   .catalog-header { grid-template-columns: minmax(170px, 1fr) auto; }

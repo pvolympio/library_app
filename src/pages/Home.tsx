@@ -167,7 +167,18 @@ export function Home({ onOpenBook }: HomeProps) {
           <span className="hero-book hero-book-one"><i /></span>
           <span className="hero-book hero-book-two"><i /></span>
           <span className="hero-book hero-book-three"><i /></span>
-          <span className="hero-orbit">∞</span>
+          <span className="hero-orbit">
+            {theme.id === "mary" ? (
+              <svg viewBox="0 0 24 24" className="mary-hero-cat" aria-hidden="true">
+                <path d="M5 14V6.5l3.8 2.8a7.4 7.4 0 0 1 6.4 0L19 6.5V14c0 3.6-3.1 6-7 6s-7-2.4-7-6Z" />
+                <circle cx="9.5" cy="13" r="1" />
+                <circle cx="14.5" cy="13" r="1" />
+                <path d="M11 15.2 12 16l1-.8" />
+              </svg>
+            ) : (
+              "∞"
+            )}
+          </span>
         </div>
       </section>
 

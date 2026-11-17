@@ -145,10 +145,10 @@
 .theme-preview-harry-potter i:nth-child(2) { background: #f5ecd8; }
 .theme-preview-harry-potter i:nth-child(3) { background: #e2b646; }
 
-.theme-preview-percy-jackson { background: #e8f4f8; }
-.theme-preview-percy-jackson i:nth-child(1) { background: #144d6b; }
-.theme-preview-percy-jackson i:nth-child(2) { background: #122026; }
-.theme-preview-percy-jackson i:nth-child(3) { background: #b8860b; }
+.theme-preview-mary { background: linear-gradient(135deg, #f0f6b9, #9fd9b3); }
+.theme-preview-mary i:nth-child(1) { background: #81657e; }
+.theme-preview-mary i:nth-child(2) { background: #3ea3af; }
+.theme-preview-mary i:nth-child(3) { background: #ff1d44; }
 
 .settings-theme-grid strong {
   align-self: end;

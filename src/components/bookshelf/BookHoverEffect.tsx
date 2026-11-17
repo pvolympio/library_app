@@ -14,6 +14,13 @@ const aliceParticles = [
   { x: 17, drift: 22, delay: 0.19, rotate: -18, kind: "leaf" },
 ] as const;
 
+const maryCatParticles = [
+  { x: -18, drift: -24, delay: 0, rotate: -18, kind: "paw" },
+  { x: -4, drift: 12, delay: 0.08, rotate: 12, kind: "cat" },
+  { x: 10, drift: -10, delay: 0.14, rotate: 22, kind: "paw" },
+  { x: 20, drift: 24, delay: 0.2, rotate: -14, kind: "cat" },
+] as const;
+
 export function BookHoverEffect({ themeId, active, burst, reducedMotion }: BookHoverEffectProps) {
   if (!active || reducedMotion) return null;
 
@@ -59,12 +66,37 @@ export function BookHoverEffect({ themeId, active, burst, reducedMotion }: BookH
 
   return (
     <span className="book-hover-effect" aria-hidden="true">
-      <motion.span
-        className="percy-book-glow"
-        initial={{ opacity: 0, scale: 0.82 }}
-        animate={{ opacity: [0.15, 0.58, 0.15], scale: [0.9, 1.12, 0.9] }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-      />
+      {maryCatParticles.map((particle, index) => (
+        <motion.span
+          key={`${burst}-${index}`}
+          className={`mary-cat-particle is-${particle.kind}`}
+          style={{ marginLeft: particle.x }}
+          initial={{ x: 0, y: 12, rotate: 0, opacity: 0, scale: 0.65 }}
+          animate={{
+            x: particle.drift,
+            y: -52,
+            rotate: particle.rotate,
+            opacity: [0, 1, 0.9, 0],
+            scale: [0.7, 1.05, 0.9],
+          }}
+          transition={{ duration: 1.15, delay: particle.delay, ease: "easeOut" }}
+        >
+          {particle.kind === "paw" ? (
+            <svg viewBox="0 0 20 20">
+              <circle cx="5.5" cy="7.5" r="1.8" />
+              <circle cx="10" cy="5.5" r="1.9" />
+              <circle cx="14.5" cy="7.5" r="1.8" />
+              <path d="M10 10.2c-2.5 0-4.2 1.8-4.2 3.7 0 1.4 1.1 2.4 2.4 2.4.7 0 1.3-.3 1.8-.3s1.1.3 1.8.3c1.3 0 2.4-1 2.4-2.4 0-1.9-1.7-3.7-4.2-3.7Z" />
+            </svg>
+          ) : (
+            <svg viewBox="0 0 20 20">
+              <path d="M4 13.5V6.5l3.2 2.4a6.4 6.4 0 0 1 5.6 0L16 6.5v7a5.5 5.5 0 0 1-6 4.5 5.5 5.5 0 0 1-6-4.5Z" />
+              <circle cx="8" cy="11.5" r="0.8" className="cat-eye" />
+              <circle cx="12" cy="11.5" r="0.8" className="cat-eye" />
+            </svg>
+          )}
+        </motion.span>
+      ))}
     </span>
   );
 }
